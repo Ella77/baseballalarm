@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baseball</title>
+</head>
+
+<script>
+
+</script>
+
+
+<body>
+<a href = "{% url 'main' %}" class="">메인화면 가기</a>
+<button class="submit" >버튼 이름</button>
+
+
+<form action=""method="POST" class="player-form">{% csrf_token %}
+        <table border="1">
+        {{ form.as_table }}
+        </table>
+    <script>function foo() {
+
+
+    var user_choice = window.confirm('관심선수 추가하시겠습니까?');
+
+
+if(user_choice==true) {
+
+window.location='/main/';
+
+  // you can also use element.submit() if your input type='submit'
+
+
+}else{
+return false;}
+}
+
+
+</script>
+
+        <input type="submit" class="save btn-btn primary" onClick="return foo()" >
+
+    </form>
+</body>
+</html>
+
