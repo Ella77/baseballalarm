@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^accounts/login/$', auth_views.LoginView.as_view(), name= 'login'),
     url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name= 'logout'),
     url(r'^settings/', views.settings, name= 'settings'),
-    url(r'^', views.main, name='main'),
-
+    url(r'^wait/$', views.wait, name='wait'),
+    url(r'^first/$', views.first, name='first'),
+    # url(r'^login/$',views.login,name='logins' ),
+    url(r'^$', views.main, name='main'),
 ]

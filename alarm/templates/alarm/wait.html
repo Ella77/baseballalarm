@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('../../../static/추신수사진.jpg') ;
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.inputMessage {
+    border: 10px solid #000;
+    bottom: 30%;
+    height: 60px;
+    left: 0;
+    outline: none;
+    padding-left: 10px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}
+
+iframe{
+    width:100%;
+    color:red;
+}
+    table{
+        color: white;
+        border: 1px solid red;
+    }
+</style>
+    <title>Baseball</title>
+</head>
+
+<script>
+ var socket = null;
+ socket = new WebSocket('ws://localhost:8080/1')
+    socket.onopen = function(event){
+     socket.send("waiting");
+    };
+    socket.onmessage = function(event){
+        var f = document.getElementById("chatbox").contentDocument;
+        f.writeln(event.data);
+    };
+    function searchKeyPress(e) {
+            if (e.keyCode == 13) {
+                document.getElementById("send").click();
+                return false;
+            }
+            return true;
+        }
+        function send(){
+        var mess = document.getElementById('text').value;
+        socket.send(mess);
+        }
+</script>
+
+
+<body>
+
+<div class="bgimg 3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    야!구보자
+  </div>
+  <div class="w3-display-middle">
+
+<a href = "{% url 'main' %}" class="">Main</a>
+   {% if user.is_authenticated %}
+
+
+        <p class="right-menu">{{ user.username }}님으로 로그인하셨습니다. <a href="{% url 'logout' %}" class="right-menu"><span
+                class="glyphicon glyphicon-log-out"></span></a></p>
+
+
+    {% else %}
+        <a href="{% url 'login' %}" class="login"><span class="glyphicon glyphicon-lock"></span></a>
+    {% endif %}
+
+
+<body>
+
+<table >
+<tr>
+    <th>응원팀</th>
+    <th>응원선수</th>
+</tr>
+{% for a in mydata %}
+<tr>
+<td>{{ a.team}} </td>
+  <td>{{ a.player }}선수</td>
+</tr>
+
+{% endfor %}
+</table>
+</body>
+
+</div>
+</div>
+
+{#<div class="inputMessage">#}
+{#    <iframe class="messages" id="chatbox"></iframe>#}
+{#</div>#}
+{#<input class="inputMessage" id="text" type="text" value="" autocomplete="off" onkeypress="searchKeyPress(event)">#}
+{##}
+{##}
+{##}
+{#<button class=inputbutton" name="submit" id="send" type="submit" value="submit-true" onclick="send()">Send</button>#}
+
+</body>
+</html>
